@@ -5,11 +5,13 @@ class NewsService {
   final Dio dio;
   NewsService(this.dio);
 
+  static const String _apiKey = String.fromEnvironment('NEWS_API_KEY');
+
   Future<List<ArticalModel>> getTopHeadlines({required String category}) async {
     // Response response = await == var but i write this i will miss write the await
     try {
       final Response response = await dio.get(
-        'https://newsapi.org/v2/top-headlines?apiKey=7f40c76d3be54dc3921fe35a37ddde24&country=us&category=$category',
+        'https://newsapi.org/v2/top-headlines?apiKey=$_apiKey&country=us&category=$category',
       );
       Map<String, dynamic> jsonData = response.data;
       List<ArticalModel> articalList = [];
